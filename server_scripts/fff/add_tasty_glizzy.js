@@ -1,19 +1,6 @@
 Platform.mods.kubejs.name = "Flurben's Fantastic Foods";
 
 // Produced by Arya the Elf
-ItemEvents.foodEaten((event) => {
-  //Get the player
-  const player = event.getEntity();
-
-  // Get the item that was used
-  const item = event.getItem();
-  if (
-    player.name.getString() == "Angelic_Arya" &&
-    item.name.getString() == "kubejs:chopped_onion"
-  ) {
-    player.effect("kubejs:choking", 20);
-  }
-});
 
 TFCEvents.data((event) => {
   event.knappingType(
@@ -313,6 +300,20 @@ ServerEvents.recipes((event) => {
       100
     )
     .itemOutput(Item.of("kubejs:raspberry_boba"));
+
+    event.recipes.tfc
+    .pot(
+      [
+        "tfc:food/taro_root",
+        "#tfc:sweetener",
+        "kubejs:boiled_boba_pearls",
+        "kubejs:empty_cup",
+      ],
+      Fluid.of("minecraft:milk", 1000),
+      100,
+      100
+    )
+    .itemOutput(Item.of("kubejs:taro_boba"));
 
   event.recipes.tfc //1x boba
     .pot(

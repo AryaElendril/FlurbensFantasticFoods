@@ -274,5 +274,14 @@ const registerTFCFoodData = (event) => {
         food.decayModifier(0.8)
     })
 
+    event.foodItem('kubejs:taro_boba', food => {
+        food.hunger(3)
+        food.saturation(0.6)
+        food.fruit(2.5)
+        food.dairy(3)
+        food.water(25)
+        food.decayModifier(0.8)
+    })
+
 
 }

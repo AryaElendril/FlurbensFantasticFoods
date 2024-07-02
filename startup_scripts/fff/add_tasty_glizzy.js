@@ -155,7 +155,25 @@ StartupEvents.registry("item", (e) => {
             true
           );
         }
-/*        if (ctx.player.username == "Angelic_Arya" && random <= probability) {
+      });
+    });
+
+    const taroBoba = e
+    .create("taro_boba")
+    .displayName("Dragonium's Delectable Taro Milk Tea")
+    .texture("fff:item/taro_boba")
+    .tag("tfc:foods")
+    .tooltip(["§7A refreshingly sweet treat!"])
+    .food((food) => {
+      food.hunger(2); // Amount of hunger restored
+      food.saturation(2); // Saturation restored
+      food.meat(false); // Indicates it's a meat item
+      food.fastToEat(false); // Whether it's fast to eat like dried kelp
+      food.alwaysEdible(true); // Whether it can be eaten when the player is not hungry
+      food.eaten((ctx) => {
+        const random = Math.random(); // Generate a random number between 0 and 1
+        const probability = 0.25; // Set the desired probability (in this case, 25%)
+        if (["Dragonium10190", "Angelic_Arya"].includes(ctx.player.username) && random <= probability) {
           ctx.player.potionEffects.add(
             "fff:choking",
             40,
@@ -164,7 +182,6 @@ StartupEvents.registry("item", (e) => {
             true
           );
         }
-          */
       });
     });
 
