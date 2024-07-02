@@ -1,0 +1,36 @@
+{
+  "variants": {
+    "age=0": {
+      "model": "fff:cucumber_age_0",
+      "texture": "fff:cucumber_0"
+    },
+    "age=1": {
+      "model": "fff:cucumber_age_1",
+      "texture": "fff:cucumber_1"
+    },
+    "age=2": {
+      "model": "fff:cucumber_age_2",
+      "texture": "fff:cucumber_2"
+    },
+    "age=3": {
+      "model": "fff:cucumber_age_3",
+      "texture": "fff:cucumber_3"
+    },
+    "age=4": {
+      "model": "fff:cucumber_age_4",
+      "texture": "fff:cucumber_4"
+    },
+    "age=5": {
+      "model": "fff:cucumber_age_5",
+      "texture": "fff:cucumber_5"
+    },
+    "age=6": {
+      "model": "fff:cucumber_age_6",
+      "texture": "fff:cucumber_6"
+    },
+    "age=7": {
+      "model": "fff:cucumber_age_7",
+      "texture": "fff:cucumber_7"
+    }
+  }
+}
