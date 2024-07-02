@@ -146,7 +146,7 @@ StartupEvents.registry("item", (e) => {
       food.eaten((ctx) => {
         const random = Math.random(); // Generate a random number between 0 and 1
         const probability = 0.25; // Set the desired probability (in this case, 25%)
-        if (ctx.player.username == "Dragonium10190" && random <= probability) {
+        if (["Dragonium10190", "Angelic_Arya"].includes(ctx.player.username) && random <= probability) {
           ctx.player.potionEffects.add(
             "fff:choking",
             40,
@@ -155,7 +155,7 @@ StartupEvents.registry("item", (e) => {
             true
           );
         }
-        if (ctx.player.username == "Angelic_Arya" && random <= probability) {
+/*        if (ctx.player.username == "Angelic_Arya" && random <= probability) {
           ctx.player.potionEffects.add(
             "fff:choking",
             40,
@@ -164,6 +164,7 @@ StartupEvents.registry("item", (e) => {
             true
           );
         }
+          */
       });
     });
 
@@ -207,22 +208,7 @@ StartupEvents.registry("item", (e) => {
       food.fastToEat(false); // Whether it's fast to eat like dried kelp
       food.alwaysEdible(false); // Whether it can be eaten when the player is not hungry
     });
-  /*
-  const choppedOnion = e
-    .create("chopped_onion")
-    .displayName("Chopped Onion")
-    .texture("fff:item/chopped_onion")
-    .tag("tfc:foods")
 
-    .food((food) => {
-      food.hunger(3); // Amount of hunger restored
-      food.saturation(2); // Saturation restored
-      food.meat(false); // Indicates it's a meat item
-      food.fastToEat(false); // Whether it's fast to eat like dried kelp
-      food.alwaysEdible(false); // Whether it can be eaten when the player is not hungry
-      food.effect('kubejs:choking', 100, 1, 1)
-    });
-*/
   const choppedOnion = e
     .create("chopped_onion")
     .displayName("Chopped Onion")

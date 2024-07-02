@@ -1,3 +1,6 @@
+//Data originally wrriten by TerraFirmaCraft - alcatrazEscapee
+//foodData for Flurben's Fantastic Foods by AryaElendril
+
 // priority: 0
 
 const registerTFCDataForTFC = (event) => {
@@ -151,6 +154,7 @@ const registerTFCKnappingTypes = (event) => {
     // event.knappingType('gtceu:rubber_plate', 1, 5, 'tfc:item.knapping.leather', true, false, true, 'gtceu:rubber_plate', 'tfg:rubber')
     // event.knappingType('gtceu:styrene_butadiene_rubber_plate', 1, 5, 'tfc:item.knapping.leather', true, false, true, 'gtceu:styrene_butadiene_rubber_plate', 'tfg:styrene_butadiene_rubber_plate')
     // event.knappingType('gtceu:silicone_rubber_plate', 1, 5, 'tfc:item.knapping.leather', true, false, true, 'gtceu:silicone_rubber_plate', 'tfg:silicone_rubber_plate')
+    //event.knappingType('kubejs:raw_dough', 1, 1, 'kubejs:')
 }
 
 const registerTFCItemSize = (event) => {
@@ -169,4 +173,106 @@ const registerTFCFoodData = (event) => {
         food.fruit(2)
         food.decayModifier(0.2)
     })
+
+    event.foodItem('kubejs:raw_hot_dog', food => {
+        food.hunger(2)
+        food.protein(1)
+        food.decayModifier(2)
+    })
+
+    event.foodItem('kubejs:cooked_hot_dog', food => {
+        food.hunger(3)
+        food.saturation(2)
+        food.protein(2)
+        food.decayModifier(1.5)
+    })
+
+    event.foodItem('kubejs:raw_hot_dog_bun', food => {
+        food.hunger(1)
+        food.saturation(0.5)
+        food.grain(1)
+        food.decayModifier(1.4)
+    })
+
+    event.foodItem('kubejs:uncut_hot_dog_bun', food => {
+        food.hunger(1.5)
+        food.saturation(0.7)
+        food.grain(1)
+        food.decayModifier(0.8)
+    })
+
+    event.foodItem('kubejs:cut_hot_dog_bun', food => {
+        food.hunger(1.5)
+        food.saturation(0.7)
+        food.grain(1)
+        food.decayModifier(0.8)
+    })
+
+    event.foodItem('kubejs:chopped_onion', food => {
+        food.hunger(2)
+        food.saturation(0.5)
+        food.vegetables(1)
+        food.decayModifier(0.6)
+    })
+
+    event.foodItem('kubejs:cucumber_fruit', food => {
+        food.hunger(2)
+        food.saturation(0.8)
+        food.vegetables(1)
+        food.decayModifier(0.4)
+        food.water(6)
+    })
+
+    event.foodItem('kubejs:pickle', food => {
+        food.hunger(2)
+        food.saturation(0.8)
+        food.vegetables(1)
+        food.decayModifier(0.4)
+        food.water(10)
+    })
+
+    event.foodItem('kubejs:pickle_spear', food => {
+        food.hunger(0.5)
+        food.saturation(0.4)
+        food.vegetables(0.25)
+        food.decayModifier(0.4)
+        food.water(2.5)
+    })
+
+    event.foodItem('kubejs:sweet_relish', food => {
+        food.hunger(1)
+        food.saturation(0.8)
+        food.vegetables(0.4)
+        food.decayModifier(0.4)
+        food.water(2.5)
+    })
+
+    event.foodItem('kubejs:tomato_wedge', food => {
+        food.hunger(1)
+        food.saturation(0.5)
+        food.vegetables(0.5)
+        food.decayModifier(3)
+        food.water(2.5)
+    })
+
+    event.foodItem('kubejs:flurbens_tasty_glizzy', food => {
+        food.hunger(10)
+        food.saturation(6)
+        food.protein(2.5)
+        food.grain(1)
+        food.vegetables(2)
+        food.water(10)
+        food.decayModifier(0.8)
+    })
+
+    event.foodItem('kubejs:raspberry_boba', food => {
+        food.hunger(3)
+        food.saturation(0.6)
+        food.fruit(2.5)
+        food.dairy(3)
+        food.water(25)
+        food.decayModifier(0.8)
+    })
+
+
 }
