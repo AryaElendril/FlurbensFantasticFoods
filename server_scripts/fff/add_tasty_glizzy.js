@@ -209,7 +209,7 @@ ServerEvents.recipes((event) => {
 
   event.shapeless(
     Item.of("kubejs:raw_dough", 1), // raw dough recipe
-    ["#tfc:foods/dough"]
+    ["#firmalife:foods/extra_dough"]
   );
 
   event.shapeless(
@@ -272,6 +272,18 @@ ServerEvents.recipes((event) => {
     .outputFluid(Fluid.of("kubejs:white_liquor", 1000))
     .inputFluid(TFC.fluidStackIngredient("tfc:lye", 1000))
     .inputItem("tfc:powder/sulfur");
+
+  event.recipes.gtceu.chemical_reactor('kubejs:white_liquor') // white liquor chemical reactor recipe
+    .itemInputs('tfc:powder/sulfur')
+    .inputFluids(Fluid.of("tfc:lye",2000))
+    .outputFluids(Fluid.of("kubejs:white_liquor",2000))
+    .EUt(100).duration(700);
+  
+  event.recipes.gtceu.chemical_reactor('tfc:lye') // lye chemical reactor recipe
+    .itemInputs('4x tfc:powder/wood_ash')
+    .inputFluids(Fluid.of("minecraft:water",1000))
+    .outputFluids(Fluid.of("tfc:lye",1000))
+    .EUt(100).duration(700);
 
   event.recipes.tfc
     .pot(
@@ -426,6 +438,14 @@ ServerEvents.recipes((event) => {
     .itemOutputs("kubejs:raw_hot_dog")
     .duration(100)
     .EUt(32);
+
+  event.recipes.gtceu
+    .extruder("kubejs:raw_hot_dog_bun") // raw hot dog bun recipe
+    .notConsumable("gtceu:normal_pipe_extruder_mold")
+    .itemInputs("kubejs:raw_dough")
+    .itemOutputs("kubejs:raw_hot_dog_bun")
+    .duration(100)
+    .EUt(32);  
 
   event.recipes.gtceu
     .forming_press("kubejs:unboiled_boba_pearls") // umboiled boba recipe
