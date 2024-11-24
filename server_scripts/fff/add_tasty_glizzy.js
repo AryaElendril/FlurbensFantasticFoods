@@ -222,6 +222,11 @@ ServerEvents.recipes((event) => {
     "kubejs:raw_hot_dog_bun"
   );
 
+  event.smelting(
+    Item.of("tfc:powder/wood_ash",1), // Wood ash recipe from charcoal powder
+    "tfc:powder/charcoal"
+  )
+
   event.smelting(Item.of("kubejs:cooked_hot_dog", 1), "kubejs:raw_hot_dog"); // cooked hot dog recipe, vanilla-style
 
   event.recipes.tfc
