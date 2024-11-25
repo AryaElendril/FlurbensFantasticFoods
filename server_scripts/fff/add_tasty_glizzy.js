@@ -224,8 +224,8 @@ ServerEvents.recipes((event) => {
 
   event.smelting(
     Item.of("tfc:powder/wood_ash",1), // Wood ash recipe from charcoal powder
-    "tfc:powder/charcoal"
-  )
+    "gtceu:wood_dust"
+  );
 
   event.smelting(Item.of("kubejs:cooked_hot_dog", 1), "kubejs:raw_hot_dog"); // cooked hot dog recipe, vanilla-style
 
@@ -459,6 +459,34 @@ ServerEvents.recipes((event) => {
     .itemOutputs("kubejs:unboiled_boba_pearls")
     .duration(80)
     .EUt(7);
+
+  event.recipes.gtceu
+    .brewery('firmalife:yeast_starter') // Brewery recipe for yeast starter 
+    .itemInputs('#tfc:foods/flour')
+    .inputFluids(Fluid.of('firmalife:yeast_starter', 100))
+    .outputFluids(Fluid.of('firmalife:yeast_starter', 600))
+    .EUt(3).duration(128);
+
+  event.recipes.gtceu
+    .brewery('tfc:vinegar') // Brewery recipe for vinegar
+    .itemInputs('#tfc:foods/fruits')
+    .inputFluids(Fluid.of('gtceu:ethanol', 250))
+    .outputFluids(Fluid.of('tfc:vinegar', 250))
+    .circuit(1)
+    .EUt(3).duration(128);
+
+  event.recipes.gtceu
+    .mixer('tfc:brine') // Mixer recipe for brine 
+    .inputFluids(Fluid.of('tfc:vinegar', 1),Fluid.of('minecraft:water', 9))
+    .outputFluids(Fluid.of('tfc:brine',10))
+    .EUt(3).duration(128);
+
+  event.recipes.gtceu
+    .mixer('kubejs:cellulose_pulp') // Mixer recipe for cellulose           
+    .itemInputs('#minecraft:logs')
+    .inputFluids(Fluid.of('kubejs:white_liquor', 125))
+    .itemOutputs('2x kubejs:cellulose_pulp')
+    .EUt(3).duration(128);
 
   event.recipes.create.crushing(
     Item.of("2x kubejs:tapioca_starch"),
