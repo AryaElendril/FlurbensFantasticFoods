@@ -556,7 +556,7 @@ event.recipes.gtceu.macerator("kubejs:tapioca_starch") // tapioca starch recipe,
 });
 
 ItemEvents.foodEaten( event => {
-  if(event.item=="kubejs:raspberry_boba","kubejs:taro_boba") {
+  if(event.item=="kubejs:raspberry_boba" || event.item=="kubejs:taro_boba") {
       event.player.give(Item.of("kubejs:empty_cup",1))
   }
 }) 
