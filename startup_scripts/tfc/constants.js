@@ -1021,6 +1021,7 @@ global.TFC_GREENHOUSE_VEGETABLE_RECIPE_COMPONENTS = [
     { input: 'kubejs:cucumber_seeds', fluid_amount: 4000, output: '3x kubejs:cucumber_fruit', name: 'cucumber' },
     { input: 'kubejs:mustard_seeds', fluid_amount: 4000, output: '3x kubejs:mustard_seed_pod', name: 'mustard' },
     { input: 'kubejs:cassava_seeds', fluid_amount: 4000, output: '3x kubejs:cassava_root', name: 'cassava' },
+    { input: 'tfc:food/taro_root', fluid_amount: 4000, output: '3x tfc:food/taro_root', name: 'taro' },
     { input: 'tfc:seeds/barley', fluid_amount: 4000, output: '3x tfc:food/barley', name: 'barley' },
     { input: 'tfc:seeds/oat', fluid_amount: 4000, output: '3x tfc:food/oat', name: 'oat' },
     { input: 'tfc:seeds/rye', fluid_amount: 4000, output: '3x tfc:food/rye', name: 'rye' },

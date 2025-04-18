@@ -1,6 +1,7 @@
 Platform.mods.kubejs.name = "Flurben's Fantastic Foods";
 
 // Produced by Arya the Elf
+//Updated and made recipes automatable by JoaquinDG
 
 TFCEvents.data((event) => {
   event.knappingType(
@@ -24,7 +25,7 @@ TFCEvents.data((event) => {
   }, "kubejs:cucumber");
 
   event.climateRange((climate) => {
-    //set the climate range for the cucumber plant
+    //set the climate range for the mustard plant
     climate.maxHydration(95);
     climate.minHydration(23);
     climate.minTemperature(5);
@@ -32,7 +33,7 @@ TFCEvents.data((event) => {
   }, "kubejs:mustard");
 
   event.climateRange((climate) => {
-    //set the climate range for the cucumber plant
+    //set the climate range for the cassava plant
     climate.maxHydration(95);
     climate.minHydration(23);
     climate.minTemperature(12);
@@ -104,6 +105,7 @@ TFCEvents.data((event) => {
     ],
     null
   );
+  
 });
 
 ServerEvents.recipes((event) => {
@@ -151,6 +153,12 @@ ServerEvents.recipes((event) => {
     ["kubejs:cassava_root", "#forge:tools/mortars"]
   );
 
+event.recipes.gtceu.macerator("kubejs:tapioca_starch") // tapioca starch recipe, gregtech mixer
+  .itemInputs("kubejs:cassava_root")
+  .itemOutputs("kubejs:tapioca_starch")
+  .duration(20)
+  .EUt(3);
+
   event.shapeless(
     Item.of("kubejs:mustard_seeds", 1), // mustard seed recipe
     ["tfc:seeds/tomato", "#forge:dyes/yellow"]
@@ -183,10 +191,17 @@ ServerEvents.recipes((event) => {
   );
 
   event.shapeless(
-    Item.of("kubejs:tapioca_dough", 4), // tapioca dough recipe, tfc buckets
+    Item.of("kubejs:tapioca_dough", 4), // tapioca dough recipe, minecraft buckets
     ["kubejs:tapioca_starch", "minecraft:water_bucket", "#tfc:sweetener"]
   );
-
+  
+  event.recipes.gtceu.mixer("kubejs:tapioca_dough") // tapioca dough recipe, gregtech mixer
+		.inputFluids(Fluid.of("minecraft:water", 250))
+    .itemInputs("#tfc:sweetener", "kubejs:tapioca_starch")
+    .itemOutputs("4x kubejs:tapioca_dough")
+    .duration(20)
+    .EUt(3);
+  
   event.shapeless(
     Item.of("kubejs:cucumber_seeds", 1), // cucumber seed recipe
     ["tfc:seeds/squash", "#forge:dyes/green"]
@@ -278,19 +293,19 @@ ServerEvents.recipes((event) => {
     .inputFluid(TFC.fluidStackIngredient("tfc:lye", 1000))
     .inputItem("tfc:powder/sulfur");
 
-  event.recipes.gtceu.chemical_reactor('kubejs:white_liquor') // white liquor chemical reactor recipe
+  event.recipes.gtceu.chemical_reactor('kubejs:white_liquor') // white liquor recipe, gregtech chemical reactor
     .itemInputs('tfc:powder/sulfur')
     .inputFluids(Fluid.of("tfc:lye",2000))
     .outputFluids(Fluid.of("kubejs:white_liquor",2000))
-    .EUt(100).duration(700);
+    .EUt(32).duration(120);
   
-  event.recipes.gtceu.chemical_reactor('tfc:lye') // lye chemical reactor recipe
+  event.recipes.gtceu.chemical_reactor('tfc:lye') // lye chemical recipe, gregtech chemical reactor
     .itemInputs('4x tfc:powder/wood_ash')
     .inputFluids(Fluid.of("minecraft:water",1000))
     .outputFluids(Fluid.of("tfc:lye",1000))
-    .EUt(100).duration(700);
+    .EUt(32).duration(120);
 
-  event.recipes.tfc
+  event.recipes.tfc // raspberry boba recipe, pot
     .pot(
       [
         "tfc:jar/raspberry",
@@ -304,7 +319,7 @@ ServerEvents.recipes((event) => {
     )
     .itemOutput(Item.of("kubejs:raspberry_boba"));
 
-  event.recipes.tfc
+  event.recipes.tfc // raspberry boba recipe, pot
     .pot(
       [
         "tfc:jar/raspberry_unsealed",
@@ -317,21 +332,41 @@ ServerEvents.recipes((event) => {
       100
     )
     .itemOutput(Item.of("kubejs:raspberry_boba"));
-
-    event.recipes.tfc
+  
+  event.recipes.gtceu.mixer("kubejs:raspberry_boba_sealed") // raspberry boba recipe, gregtech mixer
+    .itemInputs("tfc:jar/raspberry", "#tfc:sweetener", "kubejs:boiled_boba_pears", "kubejs:empty_cup")
+    .inputFluids(Fluid.of("minecraft:milk",1000))
+    .itemOutputs("kubejs:raspberry_boba")
+    .duration(20)
+    .EUt(3);
+  
+  event.recipes.gtceu.mixer("kubejs:raspberry_boba") // raspberry boba recipe, gregtech mixer
+    .itemInputs("tfc:jar/raspberry_unsealed", "#tfc:sweetener", "kubejs:boiled_boba_pears", "kubejs:empty_cup")
+    .inputFluids(Fluid.of("minecraft:milk",1000))
+    .itemOutputs("kubejs:raspberry_boba")
+    .duration(20)
+    .EUt(3);
+  
+  event.recipes.tfc // taro boba recipe, pot
     .pot(
       [
-        "tfc:food/taro_root",
         "#tfc:sweetener",
         "kubejs:boiled_boba_pearls",
         "kubejs:empty_cup",
       ],
-      Fluid.of("minecraft:milk", 1000),
+      Fluid.of("kubejs:taro_milk",1000),
       100,
       100
     )
     .itemOutput(Item.of("kubejs:taro_boba"));
-
+  
+  event.recipes.gtceu.mixer("kubejs:taro_boba") // taro boba recipe, gregtech mixer
+    .itemInputs('#tfc:sweetener', "kubejs:boiled_boba_pearls", "kubejs:empty_cup")
+    .inputFluids(Fluid.of("kubejs:taro_milk",1000))
+    .itemOutputs("kubejs:taro_boba")
+    .duration(20)
+    .EUt(3);
+  
   event.recipes.tfc //1x boba
     .pot(
       Item.of("1x kubejs:unboiled_boba_pearls"),
@@ -340,7 +375,9 @@ ServerEvents.recipes((event) => {
       100
     )
     .itemOutput(Item.of("kubejs:boiled_boba_pearls"))
-    .id("kubejs:boiled1x");
+
+  event.smelting("kubejs:boiled_boba_pearls","kubejs:unboiled_boba_pearls")
+		.id("tfg:smelting/boiled_boba_pearls");
 
   event.recipes.tfc //2x boba
     .pot(
@@ -426,46 +463,47 @@ ServerEvents.recipes((event) => {
     .notConsumable("gtceu:tiny_pipe_extruder_mold")
     .itemInputs("kubejs:cellulose_pulp")
     .itemOutputs("kubejs:hot_dog_casing")
-    .duration(100)
-    .EUt(32);
+    .duration(20)
+    .EUt(3);
 
   event.recipes.gtceu
     .extruder("empty_cup") // empty cup recipe
     .notConsumable("gtceu:bottle_extruder_mold")
     .itemInputs("kubejs:cellulose_pulp")
     .itemOutputs("kubejs:empty_cup")
-    .duration(100)
-    .EUt(32);
+    .duration(20)
+    .EUt(3);
 
   event.recipes.gtceu
     .extruder("kubejs:raw_hot_dog") // raw hot dog recipe
     .itemInputs("gtceu:meat_dust", "kubejs:hot_dog_casing")
     .itemOutputs("kubejs:raw_hot_dog")
-    .duration(100)
-    .EUt(32);
+    .duration(20)
+    .EUt(3);
 
   event.recipes.gtceu
     .extruder("kubejs:raw_hot_dog_bun") // raw hot dog bun recipe
     .notConsumable("gtceu:normal_pipe_extruder_mold")
     .itemInputs("kubejs:raw_dough")
     .itemOutputs("kubejs:raw_hot_dog_bun")
-    .duration(100)
-    .EUt(32);  
+    .duration(20)
+    .EUt(3);  
 
   event.recipes.gtceu
     .forming_press("kubejs:unboiled_boba_pearls") // umboiled boba recipe
     .notConsumable("gtceu:ball_casting_mold")
     .itemInputs("kubejs:tapioca_dough")
     .itemOutputs("kubejs:unboiled_boba_pearls")
-    .duration(80)
-    .EUt(7);
+    .duration(20)
+    .EUt(3);
 
   event.recipes.gtceu
     .brewery('firmalife:yeast_starter') // Brewery recipe for yeast starter 
     .itemInputs('#tfc:foods/flour')
     .inputFluids(Fluid.of('firmalife:yeast_starter', 100))
     .outputFluids(Fluid.of('firmalife:yeast_starter', 600))
-    .EUt(3).duration(128);
+    .duration(20)
+    .EUt(3);
 
   event.recipes.gtceu
     .brewery('tfc:vinegar') // Brewery recipe for vinegar
@@ -473,25 +511,36 @@ ServerEvents.recipes((event) => {
     .inputFluids(Fluid.of('gtceu:ethanol', 250))
     .outputFluids(Fluid.of('tfc:vinegar', 250))
     .circuit(1)
-    .EUt(3).duration(128);
+    .duration(20)
+    .EUt(3);
 
   event.recipes.gtceu
     .mixer('tfc:brine') // Mixer recipe for brine 
     .inputFluids(Fluid.of('tfc:vinegar', 1),Fluid.of('minecraft:water', 9))
     .outputFluids(Fluid.of('tfc:brine',10))
-    .EUt(3).duration(128);
+    .duration(20)
+    .EUt(3);
 
   event.recipes.gtceu
     .mixer('kubejs:cellulose_pulp') // Mixer recipe for cellulose           
     .itemInputs('#minecraft:logs')
     .inputFluids(Fluid.of('kubejs:white_liquor', 125))
     .itemOutputs('2x kubejs:cellulose_pulp')
-    .EUt(3).duration(128);
+    .duration(20)
+    .EUt(3);
+
+  event.recipes.gtceu
+    .extractor('kubejs:taro_milk') // Extractor recipe for taro milk
+    .itemInputs('tfc:food/taro_root')
+    .outputFluids(Fluid.of('kubejs:taro_milk', 125))
+    .duration(20)
+    .EUt(3);
 
   event.recipes.create.crushing(
     Item.of("2x kubejs:tapioca_starch"),
     "kubejs:cassava_root"
   );
+
   event.recipes.create.milling(
     Item.of("2x kubejs:tapioca_starch"),
     "kubejs:cassava_root"
@@ -505,3 +554,9 @@ ServerEvents.recipes((event) => {
     "kubejs:mustard_seeds"
   );
 });
+
+ItemEvents.foodEaten( event => {
+  if(event.item=="kubejs:raspberry_boba","kubejs:taro_boba") {
+      event.player.give(Item.of("kubejs:empty_cup",1))
+  }
+}) 

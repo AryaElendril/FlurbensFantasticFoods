@@ -1,4 +1,5 @@
 //Produced by Arya The Elf
+//Updated and made recipes automatable by JoaquinDG
 
 StartupEvents.registry("mob_effect", (event) => {
   event
@@ -10,6 +11,7 @@ StartupEvents.registry("mob_effect", (event) => {
 });
 
 StartupEvents.registry("block", (e) => {
+
   e.create("kubejs:cucumber", "tfc:crop") // initialize the cucumber plant
     .nutrient("potassium")
     .productItem("kubejs:cucumber_fruit")
@@ -36,6 +38,7 @@ StartupEvents.registry("block", (e) => {
     .noCollision()
     .notSolid()
     .model("kubejs:block/cassava_age_7");
+
 });
 
 StartupEvents.registry("fluid", (e) => {
@@ -44,11 +47,18 @@ StartupEvents.registry("fluid", (e) => {
     .bucketColor(0xdbeca4)
     .displayName("White Liquor")
     .tag("tfc:usable_in_barrel");
+
+  e.create("taro_milk") // initialize the taro milk fluid
+    .thinTexture(0xf7f0ff)
+    .bucketColor(0xf7f0ff)
+    .displayName("Taro Milk")
+    .tag("tfc:usable_in_barrel");
 });
 
 // Register custom items and recipes
 
 StartupEvents.registry("item", (e) => {
+
   const rawHotDog = e
     .create("raw_hot_dog")
     .displayName("Raw Hot Dog")
@@ -137,6 +147,7 @@ StartupEvents.registry("item", (e) => {
     .texture("fff:item/raspberry_boba")
     .tag("tfc:foods")
     .tooltip(["§7A refreshingly sweet treat!"])
+    .useAnimation("drink")
     .food((food) => {
       food.hunger(2); // Amount of hunger restored
       food.saturation(2); // Saturation restored
@@ -158,12 +169,13 @@ StartupEvents.registry("item", (e) => {
       });
     });
 
-    const taroBoba = e
+  const taroBoba = e
     .create("taro_boba")
-    .displayName("Dragonium's Delectable Taro Milk Tea")
+    .displayName("Dragoniums Delectable Taro Milk Tea")
     .texture("fff:item/taro_boba")
     .tag("tfc:foods")
     .tooltip(["§7A refreshingly sweet treat!"])
+    .useAnimation("drink")
     .food((food) => {
       food.hunger(2); // Amount of hunger restored
       food.saturation(2); // Saturation restored
@@ -330,9 +342,11 @@ StartupEvents.registry("item", (e) => {
       food.alwaysEdible(false); // Whether it can be eaten when the player is not hungry
     })
     .tooltip(["§7A delicious and satisfying treat!"]);
+
 });
 
 StartupEvents.modifyCreativeTab("minecraft:food_and_drinks", (e) => {
   e.addAfter("minecraft:rabbit_stew", "kubejs:chopped_onion");
   e.addAfter("kubejs:chopped_onion", "kubejs:flurbens_tasty_glizzy");
 });
+
