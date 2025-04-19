@@ -156,7 +156,7 @@ StartupEvents.registry("item", (e) => {
       food.alwaysEdible(true); // Whether it can be eaten when the player is not hungry
       food.eaten((ctx) => {
         const random = Math.random(); // Generate a random number between 0 and 1
-        const probability = 0.25; // Set the desired probability (in this case, 25%)
+        const probability = 0.1; // Set the desired probability (in this case, 25%)
         if (["Dragonium10190", "Angelic_Arya"].includes(ctx.player.username) && random <= probability) {
           ctx.player.potionEffects.add(
             "fff:choking",
