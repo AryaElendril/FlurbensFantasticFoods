@@ -128,15 +128,33 @@ ServerEvents.recipes((event) => {
     ["tfc:food/onion", "#forge:tools/knives"]
   );
 
+  event.recipes.gtceu.cutter("kubejs:chopped_onion") // chopped onion recipe, gregtech cutter
+		.itemInputs("tfc:food/onion")
+		.itemOutputs("4x kubejs:chopped_onion")
+		.duration(20)
+		.EUt(3);
+
   event.shapeless(
     Item.of("kubejs:tomato_wedge", 4), // tomato wedge recipe
     ["tfc:food/tomato", "#forge:tools/knives"]
   );
 
+  event.recipes.gtceu.cutter("kubejs:tomato_wedge") // tomato wedge recipe, gregtech cutter
+		.itemInputs("tfc:food/tomato")
+		.itemOutputs("4x kubejs:tomato_wedge")
+		.duration(20)
+		.EUt(3);
+
   event.shapeless(
     Item.of("kubejs:pickle_spear", 4), // pickle spear recipe
     ["kubejs:pickle", "#forge:tools/knives"]
   );
+
+  event.recipes.gtceu.cutter("kubejs:pickle_spear") // pickle spear recipe, gregtech cutter
+    .itemInputs("kubejs:pickle")
+    .itemOutputs("4x kubejs:pickle_spear")
+    .duration(20)
+    .EUt(3);
 
   event.shapeless(
     Item.of("kubejs:mustard_seeds", 4), // mustard seed recipe from pods
@@ -148,16 +166,22 @@ ServerEvents.recipes((event) => {
     ["kubejs:mustard_seeds", "#forge:tools/mortars"]
   );
 
+  event.recipes.gtceu.macerator("kubejs:ground_mustard") // ground mustard recipe, gregtech macerator
+    .itemInputs("kubejs:mustard_seeds")
+    .itemOutputs("kubejs:ground_mustard")
+    .duration(20)
+    .EUt(3);
+
   event.shapeless(
     Item.of("kubejs:tapioca_starch", 1), // tapioca starch recipe
     ["kubejs:cassava_root", "#forge:tools/mortars"]
   );
 
-event.recipes.gtceu.macerator("kubejs:tapioca_starch") // tapioca starch recipe, gregtech mixer
-  .itemInputs("kubejs:cassava_root")
-  .itemOutputs("kubejs:tapioca_starch")
-  .duration(20)
-  .EUt(3);
+  event.recipes.gtceu.macerator("kubejs:tapioca_starch") // tapioca starch recipe, gregtech macerator
+    .itemInputs("kubejs:cassava_root")
+    .itemOutputs("kubejs:tapioca_starch")
+    .duration(20)
+    .EUt(3);
 
   event.shapeless(
     Item.of("kubejs:mustard_seeds", 1), // mustard seed recipe
@@ -165,31 +189,34 @@ event.recipes.gtceu.macerator("kubejs:tapioca_starch") // tapioca starch recipe,
   );
 
   event.shapeless(
-    Item.of("kubejs:cassava_seeds", 1), // mustard seed recipe
+    Item.of("kubejs:cassava_seeds", 1), // cassava seed recipe
     ["tfc:seeds/potato", "#forge:dyes/brown"]
   );
-
+/*
   event.shapeless(
     Item.of("kubejs:yellow_mustard", 1), // yellow mustard recipe, tfc buckets
     [
       "kubejs:ground_mustard",
-      Item.of("tfc:wooden_bucket", {
-        fluid: { FluidName: "tfc:vinegar" },
-      }).weakNBT(),
+      Item.of("tfc:wooden_bucket", {fluid:{Amount:1000,FluidName:"firmalife:yeast_starter"}})
     ]
   );
-
+*/
+  event.recipes.gtceu.mixer("kubejs:yellow_mustard") // yellow mustard recipe, gregtech mixer
+		.inputFluids(Fluid.of("tfc:vinegar", 100))
+    .itemInputs("kubejs:ground_mustard")
+    .itemOutputs("kubejs:yellow_mustard")
+    .duration(20)
+    .EUt(3);
+/*
   event.shapeless(
     Item.of("kubejs:tapioca_dough", 4), // tapioca dough recipe, tfc buckets
     [
       "kubejs:tapioca_starch",
-      Item.of("tfc:wooden_bucket", {
-        fluid: { FluidName: "minecraft:water" },
-      }).weakNBT(),
+      Item.of("tfc:wooden_bucket", '{fluid:{Amount:1000,FluidName:"firmalife:yeast_starter"}}'),
       "#tfc:sweetener",
     ]
   );
-
+*/
   event.shapeless(
     Item.of("kubejs:tapioca_dough", 4), // tapioca dough recipe, minecraft buckets
     ["kubejs:tapioca_starch", "minecraft:water_bucket", "#tfc:sweetener"]
@@ -217,6 +244,12 @@ event.recipes.gtceu.macerator("kubejs:tapioca_starch") // tapioca starch recipe,
     ["kubejs:pickle_spear", "#forge:tools/knives", "#tfc:sweetener"]
   );
 
+  event.recipes.gtceu.cutter("kubejs:sweet_relish") // sweet relish recipe, gregtech cutter
+    .itemInputs("kubejs:pickle_spear")
+    .itemOutputs("4x kubejs:sweet_relish")
+    .duration(20)
+    .EUt(3);
+
   event.shapeless(
     Item.of("kubejs:yellow_mustard", 1), // yellow mustard recipe, vanilla bucket
     ["kubejs:ground_mustard", "tfc:bucket/vinegar"]
@@ -231,6 +264,12 @@ event.recipes.gtceu.macerator("kubejs:tapioca_starch") // tapioca starch recipe,
     Item.of("kubejs:cut_hot_dog_bun", 1), // cut hot dog bun recipe
     ["kubejs:uncut_hot_dog_bun", "#forge:tools/knives"]
   );
+
+  event.recipes.gtceu.cutter("kubejs:cut_hot_dog_bun") // cut hot dog bun recipe, gregtech cutter
+    .itemInputs("kubejs:uncut_hot_dog_bun")
+    .itemOutputs("kubejs:cut_hot_dog_bun")
+    .duration(20)
+    .EUt(3);
 
   event.smelting(
     Item.of("kubejs:uncut_hot_dog_bun", 1), // uncut hot dog bun recipe
@@ -507,8 +546,8 @@ event.recipes.gtceu.macerator("kubejs:tapioca_starch") // tapioca starch recipe,
 
   event.recipes.gtceu
     .brewery('tfc:vinegar') // Brewery recipe for vinegar
-    .itemInputs('#tfc:foods/fruits')
-    .inputFluids(Fluid.of('gtceu:ethanol', 250))
+    .itemInputs('#tfc:sweetener')
+    .inputFluids(Fluid.of("minecraft:water", 250))
     .outputFluids(Fluid.of('tfc:vinegar', 250))
     .circuit(1)
     .duration(20)
@@ -528,6 +567,14 @@ event.recipes.gtceu.macerator("kubejs:tapioca_starch") // tapioca starch recipe,
     .itemOutputs('2x kubejs:cellulose_pulp')
     .duration(20)
     .EUt(3);
+
+  event.recipes.gtceu.chemical_reactor("kubejs:pickle") // pickle recipe, gregtech chemical reactor
+    .itemInputs("kubejs:cucumber_fruit")
+    .inputFluids(Fluid.of("tfc:brine",125))
+    .itemOutputs("kubejs:pickle")
+    .duration(20)
+    .EUt(3);
+
 
   event.recipes.gtceu
     .extractor('kubejs:taro_milk') // Extractor recipe for taro milk
