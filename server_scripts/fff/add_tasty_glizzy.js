@@ -1,7 +1,8 @@
 Platform.mods.kubejs.name = "Flurben's Fantastic Foods";
 
 // Produced by Arya the Elf
-//Updated and made recipes automatable by JoaquinDG
+// Updated and made recipes automatable by JoaquinDG
+// Help with various textures by Derpesore
 
 TFCEvents.data((event) => {
   event.knappingType(
